@@ -1,25 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import './style.css';
+
+import Login from './components/Login';
+import Logout from './components/Logout';
+import Register from './components/Register';
+import Deliveries from './components/Deliveries';
+
+const rutas = [
+  { path: "/", component: Login, exact: true },
+  { path: "/register", component: Register, exact: false },
+  { path: "/deliveries", component: Deliveries},
+  { path: "/logout", component: Logout },
+];
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      {rutas.map((ruta, index) => <Route key={index} path={ruta.path} exact={ruta.exact} component={ruta.component} />)}
+    </Router>
   );
 }
 
